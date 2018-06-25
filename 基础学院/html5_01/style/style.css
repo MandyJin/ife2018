@@ -284,6 +284,8 @@ main .bottom h1{
   margin-bottom: 30px;
 }
 footer{
+  width: 1600px;
+  margin: 0 auto;
   height: 410px;
   background: #141414;
   color: #626262;
