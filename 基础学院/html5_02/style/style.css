@@ -66,7 +66,7 @@ ul{
   display: inline-block;
   margin-top: 15px;
 }
-.left p{
+.blue .left p{
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -74,19 +74,19 @@ ul{
   position: fixed;
   left: 20px;
 }
-.left p:nth-of-type(1){
+.blue .left p:nth-of-type(1){
   background: #299df5;
   top: 10px;
 }
-.left p:nth-of-type(2){
+.blue .left p:nth-of-type(2){
   background: #927ee4;
   top: 85px;
 }
-.left p:nth-of-type(3){
+.blue .left p:nth-of-type(3){
   background: #ee4e32;
   top: 160px;
 }
-.left p:nth-of-type(4){
+.blue .left p:nth-of-type(4){
   border: 3px solid #2d3848;
   color: #2d3848;
   font-size: 24px;
@@ -132,4 +132,21 @@ ul{
 .blue .right div progress{
   width: 192px;
   height: 5px;
+}
+.blue .right .num{
+  color: #fff;
+  background-color: #299df5;
+  float: right;
+  padding: 5px 8px;
+  border-radius: 13px;
+}
+.blue .right .symbol{
+  color: #fff;
+  background-color: #ee4e32;
+  float: right;
+  padding: 5px 11px;
+  border-radius: 50%;
+}
+li:hover{
+  color: #ffffff;
 }
