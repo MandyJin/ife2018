@@ -129,10 +129,8 @@ function createCheckBox(container,arg){
       if(attr=="all"){
         if(event.target.checked==true){
           ary.forEach(item=>item.children[0].checked='true')
-          bindHTML(sourceData);
         }else{
           ary.forEach(item=>item.children[0].checked=0)
-          bindHTML([])
         }
       }else{
         let count=0;
@@ -176,10 +174,4 @@ createCheckBox(product,[{
   value: 3,
   text: '智能音箱'
 }])
-let data=[]
-function changeData(){
-   data= sourceData.filter(item=>
-    event.target.value == item.region || event.target.value == item.product
-  )
-  return data;
-}
+
