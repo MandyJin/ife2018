@@ -135,6 +135,7 @@ function createCheckBox(container,arg){
           getData();
         }else{
           clickList.splice(index,1)
+          getData()
         }
       }
     }
@@ -182,27 +183,21 @@ function getData(){
         if(dataList.indexOf(sourceData[i])<0){
           dataList.push(sourceData[i])
           bindHTML(dataList)
-          console.log(1)
         } 
       }
       if(clickList[j]==sourceData[i].region ){
         if(dataList.indexOf(sourceData[i])<0){
           dataList.push(sourceData[i])
           bindHTML(dataList)
-          console.log(1)
         }
       }}else{
         if(clickList[j]==sourceData[i].product || clickList[j]==sourceData[i].region){
           if(dataList.indexOf(sourceData[i])<0){
             dataList.push(sourceData[i])
             // bindHTML(dataList)
-            console.log(1)
           }else{
-            
             arr.push(sourceData[i])
-            console.log(arr)
             bindHTML(arr)
-            console.log(2)
           }  
         }
       } 
