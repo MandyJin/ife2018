@@ -1,6 +1,8 @@
 let table = document.getElementById("table-wrapper")
 let region = document.getElementById("region")
 let product = document.getElementById("product")
+let clickList = []
+let dataList = []
 let sourceData = [{
   product: "手机",
   region: "华东",
@@ -79,29 +81,7 @@ function bindHTML(data){
   });
   table.innerHTML+=strHTML;
 }
-bindHTML(sourceData);
-// region.onchange=function(){
-//   changeData = sourceData.filter(item=>
-//     event.target.value == item.region
-//   )
-//   SelectData(changeData)
-// }
-// product.onchange=function(){
-//   changeData = sourceData.filter(item=>
-//     event.target.value == item.product
-//   )
-//   SelectData(changeData)
-// }
-// search.onclick=function(){
-//   changeData = sourceData.filter(item=>
-//     product.value == item.product && region.value == item.region
-//   )
-//   SelectData(changeData)
-// }
-// function SelectData(data){
-//   table.innerHTML=tableHeader;
-//   bindHTML(data);
-// }
+// bindHTML(sourceData);
 
 function createCheckBox(container,arg){
   let strAll = `
@@ -119,18 +99,20 @@ function createCheckBox(container,arg){
   })
   container.innerHTML+=strAll
   container.innerHTML+=strLabel
-  let changeData=[];
+  
   container.onclick = function(){
     if(event.target.type == 'checkbox'){
       let attr= event.target.getAttribute('checkbox-type')
+      let value = event.target.value;
       let ary=Array.from(container.children)
       ary.shift();
       let checkAll = ary.shift();
       if(attr=="all"){
+        bindHTML(sourceData)
         if(event.target.checked==true){
           ary.forEach(item=>item.children[0].checked='true')
         }else{
-          ary.forEach(item=>item.children[0].checked=0)
+          return false
         }
       }else{
         let count=0;
@@ -144,13 +126,18 @@ function createCheckBox(container,arg){
         }else{
           checkAll.children[0].checked=0
         }
+        if(count==0){
+          return false
+        }
+        let index = clickList.indexOf(value)
+        if(clickList.indexOf(value)<0){
+          clickList.push(value)
+          getData();
+        }else{
+          clickList.splice(index,1)
+        }
       }
     }
-    let part= sourceData.filter(item=>
-      event.target.value == item.region || event.target.value == item.product
-    )
-    changeData.push(...part)
-    bindHTML(changeData)
   }
 }
 createCheckBox(region,[{
@@ -174,4 +161,52 @@ createCheckBox(product,[{
   value: 3,
   text: '智能音箱'
 }])
+
+function getData(){
+  dataList=[]
+  let arr = []
+  let flag
+  if(clickList.length > 1){
+        
+    var flag1 = sourceData.find(item=>item.product==clickList[0])
+    var flag2 = sourceData.find(item=>item.product==clickList[1])
+    var flag3 = sourceData.find(item=>item.region==clickList[0])
+    var flag4 = sourceData.find(item=>item.region==clickList[1])
+    
+  }
+  for(let i=0;i<sourceData.length;i++){
+    for(let j=0;j<clickList.length;j++){
+      
+      if(clickList.length==1 || flag1 && flag2 || flag3 && flag4){
+      if(clickList[j]==sourceData[i].product ){
+        if(dataList.indexOf(sourceData[i])<0){
+          dataList.push(sourceData[i])
+          bindHTML(dataList)
+          console.log(1)
+        } 
+      }
+      if(clickList[j]==sourceData[i].region ){
+        if(dataList.indexOf(sourceData[i])<0){
+          dataList.push(sourceData[i])
+          bindHTML(dataList)
+          console.log(1)
+        }
+      }}else{
+        if(clickList[j]==sourceData[i].product || clickList[j]==sourceData[i].region){
+          if(dataList.indexOf(sourceData[i])<0){
+            dataList.push(sourceData[i])
+            // bindHTML(dataList)
+            console.log(1)
+          }else{
+            
+            arr.push(sourceData[i])
+            console.log(arr)
+            bindHTML(arr)
+            console.log(2)
+          }  
+        }
+      } 
+    }
+  }
+}
 
